@@ -55,10 +55,22 @@ export default function Profiles() {
         }
     }, [sortOrder, profiles]);
 
+    const handleCloseModal = () => {
+        setIsModalOpen(false)
+        setSelectedProfile(null)
+    }
+
+    const handleProfileClick = (profile) => {
+        setSelectedProfile(profile)
+        setIsModalOpen(true)
+    }
+
     if (loading) {
         return (
             <main className="min-h-screen bg-linear-to-br from-gray-200 to-gray-100 dark:from-[#0d0d0d] dark:to-[#1a1a1a] flex items-center justify-center transition-colors">
                 <div className="flex flex-col items-center gap-4">
+                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#f83f32]"></div>
+                    <span className="text-gray-500 text-xl font-light">Carregando...</span>
                     <svg
                         className="animate-spin h-12 w-12 text-gray-500 dark:text-gray-300"
                         xmlns="http://www.w3.org/2000/svg"
@@ -119,6 +131,11 @@ export default function Profiles() {
                                 { id: "name-desc", label: "Z-A", icon: <SortDesc size={14} /> },
                             ].map(btn => (
                                 <button
+                                    onClick={() => setSortOrder('id')}
+                                    className={`px-3 py-1 rounded transition-all duration-200 ${sortOrder === 'id'
+                                        ? 'bg-[#f83f32] text-white'
+                                        : 'text-gray-600 hover:bg-gray-100'
+                                        }`}
                                     key={btn.id}
                                     onClick={() => setSortOrder(btn.id)}
                                     className={
@@ -130,6 +147,27 @@ export default function Profiles() {
                                 >
                                     {btn.icon} {btn.label}
                                 </button>
+                                <button
+                                    onClick={() => setSortOrder('name-asc')}
+                                    className={`px-3 py-1 rounded transition-all duration-200 flex items-center gap-1 ${sortOrder === 'name-asc'
+                                        ? 'bg-[#f83f32] text-white'
+                                        : 'text-gray-600 hover:bg-gray-100'
+                                        }`}
+                                >
+                                    <SortAsc size={14} />
+                                    A-Z
+                                </button>
+                                <button
+                                    onClick={() => setSortOrder('name-desc')}
+                                    className={`px-3 py-1 rounded transition-all duration-200 flex items-center gap-1 ${sortOrder === 'name-desc'
+                                        ? 'bg-[#f83f32] text-white'
+                                        : 'text-gray-600 hover:bg-gray-100'
+                                        }`}
+                                >
+                                    <SortDesc size={14} />
+                                    Z-A
+                                </button>
+                            </div>
                             ))}
                         </div>
                     </div>
@@ -150,6 +188,7 @@ export default function Profiles() {
                             <ProfileCard
                                 key={profile.id}
                                 {...profile}
+                                onClick={() => handleProfileClick(profile)}
                                 onClick={() => {
                                     setSelectedProfile(profile);
                                     setIsModalOpen(true);
@@ -169,10 +208,10 @@ export default function Profiles() {
                     </div>
                 )}
             </div>
-
             <ProfileModal
                 isOpen={isModalOpen}
                 profile={selectedProfile}
+                onClose={handleCloseModal}
                 onClose={() => {
                     setIsModalOpen(false);
                     setSelectedProfile(null);

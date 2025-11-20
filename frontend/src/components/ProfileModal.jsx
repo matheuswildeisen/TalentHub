@@ -7,6 +7,10 @@ import { X, MapPin, Briefcase, Award, Globe, BookOpen } from "lucide-react";
 import { useState } from "react";
 
 export default function ProfileModal({
+    showCloseButton = true,
+    isOpen = { isModalOpen },
+    profile = { selectedProfile },
+    onClose = { handleCloseModal }
     profile,
     onClose = () => {},
     isOpen = false,

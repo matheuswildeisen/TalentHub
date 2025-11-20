@@ -78,6 +78,11 @@ export default function SearchBar() {
                         </div>
                     </div>
                 )}
+                <input
+                    type="text"
+                    placeholder="Buscar..."
+                    className="pr-4 py-2 w-64 border-b border-gray-300 outline-none transition-all duration-300 focus:border-[#f83f32] dark:text-gray-100 dark:border-gray-600"
+                />
             </div>
             <div className="lg:hidden">
                 {isExpanded ? (
@@ -101,6 +106,7 @@ export default function SearchBar() {
                                 Buscar
                             </button>
                         )}
+                        <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-300" />
                     </div>
                 ) : (
                     <button

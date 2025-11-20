@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { getLoggedUser, logout } from "../services/Auth"
 import { Search, MoonStar, X, Menu } from "lucide-react"
 import SearchBar from "./SearchBar"
@@ -8,6 +8,7 @@ export default function Navbar() {
 
     const usuario = getLoggedUser()
     const location = useLocation()
+    const navigate = useNavigate()
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -15,6 +16,7 @@ export default function Navbar() {
 
     const handleLogout = () => {
         logout()
+        navigate("/")
         setIsMobileMenuOpen(false)
     }
 

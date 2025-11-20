@@ -6,12 +6,12 @@ import Footer from "./components/Footer"
 function App() {
 
   return (
-    <>
-    <Navbar/>
-    <Outlet/>
-    <Footer/>
-   
-    </>
+    <div className="min-h-screen bg-gray-100">
+      <Navbar />
+      <Outlet />
+      <Footer />
+
+    </div>
   )
 }
 

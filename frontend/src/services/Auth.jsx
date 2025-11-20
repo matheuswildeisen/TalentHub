@@ -7,13 +7,13 @@ export const isAuthenticated = () => {
 }
 
 export const getLoggedUser = () => {
-    const usuario = localStorage.getItem("usuario")
+    const usuario = localStorage.getItem("user")
     return usuario ? JSON.parse(usuario) : null
 }
 
 export const logout = () => {
     localStorage.removeItem("token")
-    localStorage.removeItem("usuario")
+    localStorage.removeItem("user")
     window.location.href = "/"
 }
 
